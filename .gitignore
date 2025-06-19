@@ -1,0 +1,10 @@
+.pytest_cache
+.ipynb_checkpoints
+.virtual_documents
+.mypy_cache
+.venv
+
+__pycache__
+.idea
+*.pth
+*.egg-info

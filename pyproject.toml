@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "pytorch-lightning"
+version = "0.1.0"
+description = ""
+authors = ["Victor Bratko <bratko.viktor2004@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+poetry-core = "^2.1.3"
+pydantic = "^2.11.7"
+omegaconf = "^2.3.0"
+pre-commit = "^4.2.0"
+flake8 = "^7.2.0"
+mypy = "^1.16.1"
+isort = "^6.0.1"
+black = "^25.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
