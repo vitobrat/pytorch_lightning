@@ -7,7 +7,7 @@ repos:
       name: flake8
       description: wemake-python-styleguide enforcement
       entry: flake8
-      # args: ["--config=setup.cfg"]
+      args: ["--config=setup.cfg"]
       language: python
       types: [python]
       additional_dependencies: [wemake-python-styleguide>=0.17.0]

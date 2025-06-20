@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Tuple
+from typing import Tuple, Union
 
 import yaml
 from omegaconf import OmegaConf
@@ -13,7 +13,7 @@ class _BaseValidatedConfig(BaseModel):
 class ModuleConfig(_BaseValidatedConfig):
     model_name: str
     pretrained: bool
-    model_kwargs: dict
+    model_kwargs: dict[str, Union[int, float, str]]
     lr: float
 
 
@@ -22,16 +22,23 @@ class DataConfig(_BaseValidatedConfig):
     dataset_cache: bool
     img_size: Tuple[int, int]
     batch_size: int
-    data_split: Tuple[float, ...]
+    train_split: float
     num_workers: int
     pin_memory: bool
+    dataset_project: str
+    dataset_name: str
+    hue_shift_limit: int = 20
+    sat_shift_limit: int = 30
+    val_shift_limit: int = 20
+    brightness_limit: float = 0.2
+    contrast_limit: float = 0.2
 
     @model_validator(mode='after')
-    def splits_sum_up_to_one(self):
-        epsilon = 1e6
-        total = sum(self.data_split)
-        if abs(total - 1.0) > epsilon:
-            raise ValueError(f"Splits should sum up to one, got {total}")
+    def splits_check_up_to_one(self) -> 'DataConfig':
+        if not (0 < self.train_split <= 1):
+            raise ValueError(
+                f"Split must be between 0 and 1, got {self.train_split}",
+            )
 
         return self
 
