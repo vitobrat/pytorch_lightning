@@ -49,6 +49,11 @@ class TrainingConfig(_BaseValidatedConfig):
     val_every_n_epochs: int
     log_every_n_epochs: int
     deterministic: bool
+    task: str = 'multiclass'
+    average: str = 'macro'
+    start_factor: float = 1.0
+    end_factor: float = 0.01
+    seed: int = 0
 
 
 class ExperimentConfig(_BaseValidatedConfig):
@@ -60,7 +65,7 @@ class ExperimentConfig(_BaseValidatedConfig):
     module_config: ModuleConfig
 
     @classmethod
-    def from_yaml(cls, path: Path) -> 'ExperimentConfig':
+    def from_yaml(cls, path: Path | str) -> 'ExperimentConfig':
         config = OmegaConf.to_container(OmegaConf.load(path), resolve=True)
         return cls(**config)
 
