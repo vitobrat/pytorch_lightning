@@ -37,14 +37,13 @@ class ClassificationDataModule(LightningDataModule):
     def class_to_idx(self) -> Dict[str, int]:
         if not self.initialized:
             self.prepare_data()
-            self.setup(stage='test')
-        if self.test_dataset is None or self.train_dataset is None:
+            self.setup('test')
+        if self.test_dataset is None:
             raise ValueError('Test dataset not initialized')
-        return self.train_dataset.class_to_idx
+        return self.test_dataset.class_to_idx
 
     def prepare_data(self) -> None:
         dataset = Dataset.get(
-            dataset_project=self.config.data_config.dataset_name,
             dataset_name=self.config.data_config.dataset_name,
         )
         local_path = dataset.get_local_copy()

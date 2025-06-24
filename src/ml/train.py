@@ -42,6 +42,6 @@ def train(config: ExperimentConfig) -> None:
 if __name__ == '__main__':
     config_path = os.getenv(
         'TRAIN_CONFIG_PATH',
-        Path(PROJECT_ROOT, 'configs', 'training.yaml'),
+        Path(PROJECT_ROOT, 'configs', 'train_config.yaml'),
     )
     train(config=ExperimentConfig.from_yaml(config_path))

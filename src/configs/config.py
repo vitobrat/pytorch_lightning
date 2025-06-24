@@ -18,14 +18,12 @@ class ModuleConfig(_BaseValidatedConfig):
 
 
 class DataConfig(_BaseValidatedConfig):
-    dataset_url: str
     dataset_cache: bool
     img_size: Tuple[int, int]
     batch_size: int
     train_split: float
     num_workers: int
     pin_memory: bool
-    dataset_project: str
     dataset_name: str
     hue_shift_limit: int = 20
     sat_shift_limit: int = 30
